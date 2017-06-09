@@ -2,27 +2,73 @@ use uo;
 use os;
 use sql;
 
+CONST ACCT_MAX_CHARACTERS	:= 5;
+
 print("Initializing web API!");
 
-var acct, charSlot, charRef;
+var acct, chars;
 while( 1 )
 	//clear old db data
 
 	foreach acct_name in ( ListAccounts() )
 		acct := FindAccount( acct_name );
 		
-		//export body 
-		
-		for( charSlot := 1; charSlot <= 7 ; charSlot:= charSlot + 1 )
-			charRef := acct.GetCharacter(charSlot);
-			if( charRef )
-				//export clothes and hair;
-			endif
-			SleepMs(2);
-		endfor
+		if( GetNumCharacters( acct ) > 0 )
+			//export body 
+			
+			chars := GetCharacters( acct )
+			foreach charRef in ( chars )
+				if( charRef )
+					//export clothes and hair;
+				endif
+				
+				SleepMs(2);
+			endfor
+		endif
 		
 		Sleep(1);
 	endforeach
 	
 	Sleep(30 * 60);
 endwhile
+
+function GetCharacters( account )
+
+	if( TypeOf( account ) != "AccountRef" )
+		account := FindAccount( account );
+		if( account.errortext )
+			return account;
+		endif
+	endif
+
+	var mobile_list := array;
+	for i:=1 to MAX_CHARACTERS
+		var mobile := account.GetCharacter(i);
+		if( mobile )
+			mobile_list.Append( mobile );
+		endif
+		SleepMS(2);
+	endfor
+
+	return mobile_list;
+endfunction
+
+function GetNumCharacters( account )
+
+	if( TypeOf( account ) != "AccountRef" )
+		account := FindAccount( account );
+		if( account.errortext )
+			return account;
+		endif
+	endif
+
+	var count := 0;
+	for i:=1 to MAX_CHARACTERS
+		if( account.GetCharacter( i ))
+			count := count+1;
+		endif
+		SleepMS(2);
+	endfor
+
+	return count;
+endfunction
