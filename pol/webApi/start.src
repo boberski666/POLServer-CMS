@@ -1,0 +1,28 @@
+use uo;
+use os;
+use sql;
+
+print("Initializing web API!");
+
+var acct, charSlot, charRef;
+while( 1 )
+	//clear old db data
+
+	foreach acct_name in ( ListAccounts() )
+		acct := FindAccount( acct_name );
+		
+		//export body 
+		
+		for( charSlot := 1; charSlot <= 7 ; charSlot:= charSlot + 1 )
+			charRef := acct.GetCharacter(charSlot);
+			if( charRef )
+				//export clothes and hair;
+			endif
+			SleepMs(2);
+		endfor
+		
+		Sleep(1);
+	endforeach
+	
+	Sleep(30 * 60);
+endwhile

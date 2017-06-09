@@ -1,0 +1,6 @@
+use uo;
+use sql;
+
+program onLogoff( who )
+
+endprogram

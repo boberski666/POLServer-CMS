@@ -1,0 +1,6 @@
+use uo;
+use sql;
+
+program onLogon(who)
+
+endprogram
