@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_row($result)) {
         $items[2][$num++] = 3.5; // Fix for tunic
         $dosort           = 1;
     } else if ($row[2] == 99) {
-        $items[2][$num++] = 1.5; // Fix for hair
+        $items[2][$num++] = 0.5; // Fix for hair and beard
         $dosort           = 1;
     } else
         $items[2][$num++] = $row[2];
