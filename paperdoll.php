@@ -8,14 +8,14 @@ if (!isset($_GET['name'])) {
     echo "Name not set!";
     die();
 }
-$name = $_GET['name'];
+$n = $_GET['name'];
 unset($_GET['name']);
 $mulpath = "uofiles/";
 
 $db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
-$result = mysqli_query($db, "SELECT char_id,char_nototitle,char_race,char_body,char_female,char_bodyhue FROM " . TBL_CHARS . " WHERE char_name LIKE '$name'");
-if (!(list($charID, $nametitle, $charRace, $charBodyType, $charfemale, $charbodyhue) = mysqli_fetch_row($result)))
+$result = mysqli_query($db, "SELECT char_id,char_name,char_title,char_race,char_body,char_female,char_bodyhue FROM " . TBL_CHARS . " WHERE char_name LIKE '$n'");
+if (!(list($charID, $name, $title, $charRace, $charBodyType, $charfemale, $charbodyhue) = mysqli_fetch_row($result)))
     die();
 mysqli_free_result($result);
 
@@ -181,16 +181,6 @@ for ($i = 0; $i < sizeof($indexA); $i++) {
         }
     }
     LoadRawGump($gumpindex, $gumpfile, intval($gumpid), $hue, $hues, $gumprawdata);
-}
-
-// Separate name and skill title
-$nametitle = striphtmlchars($nametitle);
-if (($i = strpos($nametitle, ",")) !== false) {
-    $name  = substr($nametitle, 0, $i);
-    $title = substr($nametitle, $i + 2);
-} else {
-    $name  = $nametitle;
-    $title = "";
 }
 
 AddText($gumprawdata, $name, $title, $charRace);
