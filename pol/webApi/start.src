@@ -2,24 +2,30 @@ use uo;
 use os;
 use sql;
 
-CONST ACCT_MAX_CHARACTERS	:= 5;
+include ":webApi:accounts";
+include ":webApi:settings";
+
+var acct, chars, db, settings;
 
 print("Initializing web API!");
+settings := ACCT_GetSettingsCfgElem( "Settings" );
 
-var acct, chars;
 while( 1 )
-	//clear old db data
+	db := mysql_connect(settings.DBHost,settings.DBUser,settings.DBPass);
+	mysql_select_db(db,settings.DBName);
+	
+	mysql_query(db,"TRUNCATE TABLE "+settings.CharTable+";");
+	mysql_query(db,"TRUNCATE TABLE "+settings.CharLayers+";");
 
 	foreach acct_name in ( ListAccounts() )
 		acct := FindAccount( acct_name );
 		
 		if( GetNumCharacters( acct ) > 0 )
-			//export body 
-			
 			chars := GetCharacters( acct )
 			foreach charRef in ( chars )
 				if( charRef )
 					//export clothes and hair;
+					
 				endif
 				
 				SleepMs(2);
@@ -29,46 +35,6 @@ while( 1 )
 		Sleep(1);
 	endforeach
 	
-	Sleep(30 * 60);
+	mysql_close(db);
+	Sleep(settings.CharExportDelay * 60);
 endwhile
-
-function GetCharacters( account )
-
-	if( TypeOf( account ) != "AccountRef" )
-		account := FindAccount( account );
-		if( account.errortext )
-			return account;
-		endif
-	endif
-
-	var mobile_list := array;
-	for i:=1 to MAX_CHARACTERS
-		var mobile := account.GetCharacter(i);
-		if( mobile )
-			mobile_list.Append( mobile );
-		endif
-		SleepMS(2);
-	endfor
-
-	return mobile_list;
-endfunction
-
-function GetNumCharacters( account )
-
-	if( TypeOf( account ) != "AccountRef" )
-		account := FindAccount( account );
-		if( account.errortext )
-			return account;
-		endif
-	endif
-
-	var count := 0;
-	for i:=1 to MAX_CHARACTERS
-		if( account.GetCharacter( i ))
-			count := count+1;
-		endif
-		SleepMS(2);
-	endfor
-
-	return count;
-endfunction
