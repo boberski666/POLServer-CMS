@@ -11,5 +11,5 @@ RewriteRule ^art/id/(\d+)/?$ artfix.php?id=$1&hue=$2 [QSA]
 RewriteRule ^art/id/(\d+)/hue/(\d+)/?$ artfix.php?id=$1&hue=0 [QSA]
 RewriteRule ^art/?$ artfix.php?id=0&hue=0 [QSA]
 
-RewriteRule ^paperdoll/name/(\d+)/?$ paperdoll.php?name=$1 [QSA]
+RewriteRule ^paperdoll/name/(\w+)/?$ paperdoll.php?name=$1 [QSA]
 RewriteRule ^paperdoll/?$ paperdoll.php [QSA]
