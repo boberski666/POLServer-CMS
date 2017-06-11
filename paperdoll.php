@@ -15,13 +15,13 @@ $mulpath = "uofiles/";
 $db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
 $result = mysqli_query($db, "SELECT char_id,char_name,char_title,char_race,char_body,char_female,char_bodyhue FROM " . TBL_CHARS . " WHERE char_name LIKE '$n'");
-if (!(list($charID, $name, $title, $charRace, $charBodyType, $charfemale, $charbodyhue) = mysqli_fetch_row($result)))
+if (!(list($charID, $charName, $charTitle, $charRace, $charBodyType, $charFemale, $charBodyHue) = mysqli_fetch_row($result)))
     die();
 mysqli_free_result($result);
 
 // Insert body into variables
 $indexA  = $charBodyType;
-$femaleA = $charfemale;
+$femaleA = $charFemale;
 
 if ($indexA == 400)
     $indexA = 12; // Human Male
@@ -35,7 +35,7 @@ if ($indexA == 667)
     $indexA = 665; // Garg Female
 // Garg Male is ok (666)
 
-$hueA    = $charbodyhue;
+$hueA    = $charBodyHue;
 $isgumpA = "1";
 
 $result = mysqli_query($db, "SELECT item_id,item_hue,layer_id FROM " . TBL_CHARS_LAYERS . " WHERE char_id=$charID");
@@ -66,7 +66,7 @@ if ($dosort)
 for ($i = 0; $i < $num; $i++) {
     $indexA .= "," . $items[0][$i];
     $hueA .= "," . $items[1][$i];
-    if ($charfemale)
+    if ($charFemale)
         $femaleA .= ",1";
     else
         $femaleA .= ",0";
@@ -183,7 +183,7 @@ for ($i = 0; $i < sizeof($indexA); $i++) {
     LoadRawGump($gumpindex, $gumpfile, intval($gumpid), $hue, $hues, $gumprawdata);
 }
 
-AddText($gumprawdata, $name, $title, $charRace);
+AddText($gumprawdata, $charName, $charTitle, $charRace);
 CreateGump($gumprawdata);
 fclose($hues);
 fclose($tiledata);
