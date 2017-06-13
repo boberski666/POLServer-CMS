@@ -43,13 +43,11 @@ $items  = array(
     array()
 );
 $num    = 0;
-$dosort = 0;
 while ($row = mysqli_fetch_row($result)) {
     $items[0][$num] = $row[0];
     $items[1][$num] = $row[1];
     if ($row[2] == 13) {
         $items[2][$num++] = 3.5; // Fix for tunic
-        $dosort           = 1;
     } else
         $items[2][$num++] = $row[2];
 }
@@ -57,8 +55,7 @@ while ($row = mysqli_fetch_row($result)) {
 mysqli_free_result($result);
 mysqli_close($db);
 
-if ($dosort)
-    array_multisort($items[2], SORT_ASC, SORT_NUMERIC, $items[0], SORT_ASC, SORT_NUMERIC, $items[1], SORT_ASC, SORT_NUMERIC);
+array_multisort($items[2], SORT_ASC, SORT_NUMERIC, $items[0], SORT_ASC, SORT_NUMERIC, $items[1], SORT_ASC, SORT_NUMERIC);
 
 for ($i = 0; $i < $num; $i++) {
     $indexA .= "," . $items[0][$i];
