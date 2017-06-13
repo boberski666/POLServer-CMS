@@ -1,7 +1,7 @@
 use uo;
 use os;
 
-CONST ACCT_MAX_CHARACTERS	:= 5;
+CONST MAX_CHARACTERS	:= 5;
 
 function GetCharacters( account )
 

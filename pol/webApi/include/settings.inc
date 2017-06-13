@@ -6,7 +6,7 @@ function GetSettingsCfgFile()
 
 	var cfg := ReadConfigFile( ":webApi:settings" );
 	if( cfg.errortext )
-		SysLog( "Error::GetSettingsCfgFile() - Unable to open [:webApi:settings.cfg] ->"+cfg.errortext );
+		print( "Error::GetSettingsCfgFile() - Unable to open [:webApi:settings.cfg] ->"+cfg.errortext );
 	endif
 
 	return cfg;
@@ -21,7 +21,7 @@ function GetSettingsCfgElem( elem_name, byref cfg_file:=0 )
 	var elem := cfg_file[elem_name];
 
 	if( elem.errortext )
-		SysLog( "Error::GetSettingsCfgElem() - Unable to find elem ["+elem_name+"] ->"+elem.errortext );
+		print( "Error::GetSettingsCfgElem() - Unable to find elem ["+elem_name+"] ->"+elem.errortext );
 	endif
 
 	return elem;
