@@ -1,75 +1,10 @@
-use uo;
 use os;
-use sql;
 
-include ":webApi:accounts";
-include ":webApi:settings";
+Print("Initializing web API.");
 
-program GlobalControl()
-	var acct, chars, db, settings, index;
-
-	print("Initializing web API!");
-	settings := GetSettingsCfgElem( "Settings" );
-
-	while( 1 )
-		db := mysql_connect(settings.DBHost,settings.DBUser,settings.DBPass);
-		print (settings.DBHost+" "+settings.DBUser+" "+settings.DBPass);
-		if( db )
-			mysql_select_db(db,settings.DBName);
-			
-			mysql_query(db,"TRUNCATE TABLE "+settings.CharTable);
-			mysql_query(db,"TRUNCATE TABLE "+settings.CharLayers);
-			
-			print("TRUNCATE TABLE "+settings.CharTable);
-			print("TRUNCATE TABLE "+settings.CharLayers);
-			
-			index := 0;
-
-			foreach acct_name in ( ListAccounts() )
-				acct := FindAccount( acct_name );
-				
-				if ( GetNumCharacters( acct ) > 0 )
-					chars := GetCharacters( acct );
-					foreach charRef in ( chars )
-						if ( charRef )
-							var race := "";
-							
-							if (charRef.trueobjtype == 0x190 || charRef.trueobjtype == 0x191)
-								race := "Human";
-							elseif (charRef.trueobjtype == 0x25D || charRef.trueobjtype == 0x25E)
-								race := "Elf";
-							elseif (charRef.trueobjtype == 0x29A || charRef.trueobjtype == 0x29B)
-								race := "Gargoyle";
-							else 
-								race := "Other";
-							endif
-						
-							mysql_query(db,"INSERT INTO "+settings.CharTable+" (char_id, char_name, char_title, char_race, char_body, char_female, char_bodyhue, char_public ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",array{index, charRef.name, charRef.title_prefix, race, charRef.trueobjtype, charRef.gender, charRef.truecolor, 0});
-							
-							var x, i;
-							for (i := 1; i <= 24; i := i + 1)
-								x := GetEquipmentByLayer(charRef, i);
-								
-								if ( (i == 0x0b) || (i == 0x10) || (i == 0x15) )
-									mysql_query(db,"INSERT INTO "+settings.CharLayers+" (char_id, layer_id, item_id, item_hue) VALUES (?, ?, ?, ?)",array{index, 0, x.objtype, x.color});
-								else
-									mysql_query(db,"INSERT INTO "+settings.CharLayers+" (char_id, layer_id, item_id, item_hue) VALUES (?, ?, ?, ?)",array{index, i, x.objtype, x.color});
-								endif
-							endfor
-							
-						endif
-						
-						index := index + 1;
-						SleepMs(2);
-					endforeach
-				endif
-				
-				Sleep(1);
-			endforeach
-			
-			mysql_close(db);
-		endif
-		
-		Sleep(1800);
-	endwhile
-endprogram
+var script := Start_Script("charExport/charExport");
+if ( script.errortext )
+	SysLog("Error starting char export ->"+script.errortext);
+else
+	Print("Starting char export... OK.");
+endif
