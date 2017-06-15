@@ -1,0 +1,47 @@
+use uo;
+use basic;
+use os;
+
+include ":webApi:settings";
+
+program webApi(connection)
+	var settings := GetSettingsCfgElem( "Settings" );
+
+	while ( connection )
+		var event := Wait_For_Event(5);
+		if ( event )
+			var val := event.value;
+			var passwd := val[1];
+			var param := val[2];
+			
+			if ( settings.WebApiPass != passwd )
+				connection.Transmit(array{"Error", "Invalid webApi password."});
+				return 0;
+			endif
+			
+			case(param)
+        "status": connection.transmit(ServerStats());
+        default: connection.transmit(0);
+      endcase
+			
+		return 1;
+		else
+			connection.Transmit(array{"Error", "Connection timed out."});
+			return 0;
+		endif
+	endwhile
+endprogram
+
+function ServerStats()
+  var retvalue := array;
+  retvalue.append(CStr(len(ListAccounts())));
+  retvalue.append(CStr(polcore().uptime));
+  var tot := 0;
+  foreach chr in EnumerateOnlineCharacters()
+      tot := tot+1;
+  endforeach
+  retvalue.append(CStr(tot));
+
+  return retvalue;
+
+endfunction

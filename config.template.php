@@ -9,3 +9,10 @@ define("DB_PASS","");
 /*Character Tables*/
 define("TBL_CHARS", "characters");
 define("TBL_CHARS_LAYERS", "characters_layers");
+
+/*POL data*/
+define("POL_HOST", "localhost");
+define("POL_PUBLIC_HOST", "publichost");
+define("POL_PORT", "2594");
+define("POL_AUX_PORT", "5066");
+define("POL_AUX_PASSWORD", "");

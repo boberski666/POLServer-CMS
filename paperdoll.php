@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include 'config.php';
+require_once('config.php');
 
 if (!isset($_GET['name'])) {
     echo "Name not set!";
