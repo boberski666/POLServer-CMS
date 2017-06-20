@@ -3,13 +3,13 @@ RewriteEngine On
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 
-RewriteRule ^gump/id/(\d+)/hue/(\d+)/?$ gumpart.php?id=$1&hue=$2 [QSA]
-RewriteRule ^gump/id/(\d+)/?$ gumpart.php?id=$1&hue=0 [QSA]
+RewriteRule ^gump/id/([^/]*)/hue/([^/]*)/?$ gumpart.php?id=$1&hue=$2 [QSA]
+RewriteRule ^gump/id/([^/]*)/?$ gumpart.php?id=$1&hue=0 [QSA]
 RewriteRule ^gump/?$ gumpart.php?id=0&hue=0 [QSA]
 
-RewriteRule ^art/id/(\d+)/?$ artfix.php?id=$1&hue=$2 [QSA]
-RewriteRule ^art/id/(\d+)/hue/(\d+)/?$ artfix.php?id=$1&hue=0 [QSA]
+RewriteRule ^art/id/([^/]*)/?$ artfix.php?id=$1&hue=$2 [QSA]
+RewriteRule ^art/id/([^/]*)/hue/([^/]*)/?$ artfix.php?id=$1&hue=0 [QSA]
 RewriteRule ^art/?$ artfix.php?id=0&hue=0 [QSA]
 
-RewriteRule ^paperdoll/name/(\w+)/?$ paperdoll.php?name=$1 [QSA]
+RewriteRule ^paperdoll/name/([^/]*)/?$ paperdoll.php?name=$1 [QSA]
 RewriteRule ^paperdoll/?$ paperdoll.php [QSA]
