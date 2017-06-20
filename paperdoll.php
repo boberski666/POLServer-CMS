@@ -8,7 +8,7 @@ if (!isset($_GET['name'])) {
     echo "Name not set!";
     die();
 }
-$n = $_GET['name'];
+$n = str_replace("-", " ", $_GET['name']);
 unset($_GET['name']);
 $mulpath = "uofiles/";
 
