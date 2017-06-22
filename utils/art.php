@@ -26,7 +26,7 @@ if (isset($_GET["id"])) {
 
 function createart($id, $hue, $show)
 {
-    if (file_exists("images/art/art_" . $id . "_" . $hue . ".png")) {
+    if (file_exists("../images/art/art_" . $id . "_" . $hue . ".png")) {
         if ($show) {
             Header("Content-type: image/png");
             Header("Content-disposition: inline; filename=art_" . $id . "_" . $hue . ".png");
@@ -40,7 +40,7 @@ function createart($id, $hue, $show)
     }
     
     $oldhue  = $hue;
-    $mulpath = "uofiles/";
+    $mulpath = "../uofiles/";
     $hue     = hex($hue);
     $id      = hex($id);
     $id += 0x4000;
@@ -217,12 +217,12 @@ function createart($id, $hue, $show)
     $index = $id - 0x4000;
     if (hexdec($oldhue) > 0)
         $hue = $hue + 1;
-    imagepng($im, "images/art/art_" . $index . "_" . $hue . ".png", 0, NULL);
+    imagepng($im, "../images/art/art_" . $index . "_" . $hue . ".png", 0, NULL);
     imagedestroy($im);
     if ($show == 1) {
         Header("Content-type: image/png");
         Header("Content-disposition: inline; filename=art_" . $id . "_" . $hue . ".png");
-        $img   = imagecreatefrompng("images/art/art_" . $index . "_" . $hue . ".png");
+        $img   = imagecreatefrompng("../images/art/art_" . $index . "_" . $hue . ".png");
         $black = imagecolorallocate($img, 0, 0, 0);
         imagecolortransparent($img, $black);
         imagepng($img);

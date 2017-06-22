@@ -23,11 +23,11 @@ if (isset($_GET["id"])) {
 
 function creategumpart($index, $hue, $show)
 {
-    if (file_exists("images/gumpart/gumpart_" . $index . "_" . $hue . ".png")) {
+    if (file_exists("../images/gumpart/gumpart_" . $index . "_" . $hue . ".png")) {
         if ($show == 1) {
             Header("Content-type: image/png");
             header("Content-disposition: inline; filename=gumpart_" . $index . "_" . $hue . ".png");
-            $img   = imagecreatefrompng("images/gumpart/gumpart_" . $index . "_" . $hue . ".png");
+            $img   = imagecreatefrompng("../images/gumpart/gumpart_" . $index . "_" . $hue . ".png");
             $black = imagecolorallocate($img, 0, 0, 0);
             imagecolortransparent($img, $black);
             imagepng($img);
@@ -35,7 +35,7 @@ function creategumpart($index, $hue, $show)
         }
     }
     
-    $mulpath   = "uofiles/";
+    $mulpath   = "../uofiles/";
     $isgump    = intval(1);
     $hues      = false;
     $tiledata  = false;
@@ -115,7 +115,7 @@ function creategumpart($index, $hue, $show)
     if ($show == 1) {
         Header("Content-type: image/png");
         header("Content-disposition: inline; filename=gumpart_" . $index . "_" . $hue . ".png");
-        $img   = imagecreatefrompng("images/gumpart/gumpart_" . $index . "_" . $hue . ".png");
+        $img   = imagecreatefrompng("../images/gumpart/gumpart_" . $index . "_" . $hue . ".png");
         $black = imagecolorallocate($img, 0, 0, 0);
         imagecolortransparent($img, $black);
         imagepng($img);
@@ -288,6 +288,6 @@ function InitializeGump(&$img, $width, $height)
 
 function CreateGump(&$img, $index, $hue)
 {
-    imagepng($img, "images/gumpart/gumpart_" . $index . "_" . $hue . ".png", 0, NULL);
+    imagepng($img, "../images/gumpart/gumpart_" . $index . "_" . $hue . ".png", 0, NULL);
     imagedestroy($img);
 }

@@ -18,16 +18,16 @@ if (isset($_GET["id"])) {
             $hue = intval($hue);
     }
     $show = isset($_GET["show"]) ? $_GET["show"] : true;
-    if (!(file_exists("images/art/art_" . $id . "_" . $hue . ".png"))) {
-        include("art.php");
+    if (!(file_exists("../images/art/art_" . $id . "_" . $hue . ".png"))) {
+        include("../utils/art.php");
         createart($id, $hue, 0);
     }
-    if (!(file_exists("images/art/fixedart_" . $id . "_" . $hue . ".png")))
+    if (!(file_exists("../images/art/fixedart_" . $id . "_" . $hue . ".png")))
         fixart($id, $hue, $show);
     else {
         Header("Content-type: image/png");
         Header("Content-disposition: inline; filename=art_" . $id . "_" . $hue . ".png");
-        $img   = imagecreatefrompng("images/art/fixedart_" . $id . "_" . $hue . ".png");
+        $img   = imagecreatefrompng("../images/art/fixedart_" . $id . "_" . $hue . ".png");
         $black = imagecolorallocate($img, 0, 0, 0);
         imagecolortransparent($img, $black);
         imagepng($img);
