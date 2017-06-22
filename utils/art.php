@@ -30,7 +30,7 @@ function createart($id, $hue, $show)
         if ($show) {
             Header("Content-type: image/png");
             Header("Content-disposition: inline; filename=art_" . $id . "_" . $hue . ".png");
-            $img   = imagecreatefrompng("images/art/art_" . $id . "_" . $hue . ".png");
+            $img   = imagecreatefrompng("../images/art/art_" . $id . "_" . $hue . ".png");
             $black = imagecolorallocate($img, 0, 0, 0);
             imagecolortransparent($img, $black);
             imagepng($img);

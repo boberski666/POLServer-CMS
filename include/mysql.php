@@ -1,5 +1,5 @@
 <?php
-require_once('../config.php');
+require_once('./config.php');
 
 class Mysql
 {
@@ -25,7 +25,7 @@ class Mysql
     function __destruct()
     {
         if (is_resource(self::$link))
-            mysql_close(self::$link);
+            mysqli_close(self::$link);
     }
     
     /**
@@ -63,9 +63,9 @@ class Mysql
     static private function connection()
     {
         if (!is_resource(self::$link) || empty(self::$link)) {
-            if (($link = mysql_connect(self::$connection_info['host'], self::$connection_info['user'], self::$connection_info['pass'])) && mysql_select_db(self::$connection_info['db'], $link)) {
+            if (($link = mysqli_connect(self::$connection_info['host'], self::$connection_info['user'], self::$connection_info['pass'])) && mysqli_select_db($link, self::$connection_info['db'])) {
                 self::$link = $link;
-                mysql_set_charset('utf8');
+                mysqli_set_charset($link, 'utf8');
             } else {
                 throw new Exception('Could not connect to MySQL database.');
             }
@@ -79,14 +79,22 @@ class Mysql
     
     static private function __where($info, $type = 'AND')
     {
-        $link =& self::connection();
+        $link = self::connection();
         $where = self::$where;
         foreach ($info as $row => $value) {
-            if (empty($where)) {
-                $where = sprintf("WHERE `%s`='%s'", $row, mysql_real_escape_string($value));
-            } else {
-                $where .= sprintf(" %s `%s`='%s'", $type, $row, mysql_real_escape_string($value));
-            }
+			if (is_string ($value)) {
+				if (empty($where)) {
+					$where = sprintf("WHERE `%s` LIKE '%s'", $row, mysqli_real_escape_string($link, $value));
+				} else {
+					$where .= sprintf(" %s `%s` LIKE '%s'", $type, $row, mysqli_real_escape_string($link, $value));
+				}
+			} else {
+				if (empty($where)) {
+					$where = sprintf("WHERE `%s`='%s'", $row, mysqli_real_escape_string($link, $value));
+				} else {
+					$where .= sprintf(" %s `%s`='%s'", $type, $row, mysqli_real_escape_string($link, $value));
+				}
+			}
         }
         self::$where = $where;
     }
@@ -186,23 +194,23 @@ class Mysql
     
     public function query($qry, $return = false)
     {
-        $link =& self::connection();
+        $link = self::connection();
         self::set('last_query', $qry);
-        $result = mysql_query($qry);
+        $result = mysqli_query($link, $qry);
         if (is_resource($result)) {
-            self::set('num_rows', mysql_num_rows($result));
+            self::set('num_rows', mysqli_num_rows($result));
         }
         if ($return) {
             if (preg_match('/LIMIT 1/', $qry)) {
-                $data = mysql_fetch_assoc($result);
-                mysql_free_result($result);
+                $data = mysqli_fetch_assoc($result);
+                mysqli_free_result($result);
                 return $data;
             } else {
                 $data = array();
-                while ($row = mysql_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                     $data[] = $row;
                 }
-                mysql_free_result($result);
+                mysqli_free_result($result);
                 return $data;
             }
         }
@@ -211,7 +219,7 @@ class Mysql
     
     public function get($table, $select = '*')
     {
-        $link =& self::connection();
+        $link = self::connection();
         if (is_array($select)) {
             $cols = '';
             foreach ($select as $col) {
@@ -219,48 +227,52 @@ class Mysql
             }
             $select = substr($cols, 0, -1);
         }
-        $sql = sprintf("SELECT %s FROM %s%s", $select, $table, self::extra());
+        $sql = sprintf("SELECT %s FROM `%s`%s", $select, $table, self::extra());
+
+		$data = null;
+		
         self::set('last_query', $sql);
-        if (!($result = mysql_query($sql))) {
-            throw new Exception('Error executing MySQL query: ' . $sql . '. MySQL error ' . mysql_errno() . ': ' . mysql_error());
+        if (!($result = mysqli_query($link, $sql))) {
+            throw new Exception('Error executing MySQL query: ' . $sql . '. MySQL error ' . mysqli_errno() . ': ' . mysqli_error());
             $data = false;
         } elseif (is_resource($result)) {
-            $num_rows = mysql_num_rows($result);
+            $num_rows = mysqli_num_rows($result);
             self::set('num_rows', $num_rows);
             if ($num_rows === 0) {
                 $data = false;
             } elseif (preg_match('/LIMIT 1/', $sql)) {
-                $data = mysql_fetch_assoc($result);
+                $data = mysqli_fetch_assoc($result);
             } else {
                 $data = array();
-                while ($row = mysql_fetch_assoc($result)) {
+                while ($row = mysqli_fetch_assoc($result)) {
                     $data[] = $row;
                 }
             }
         } else {
             $data = false;
         }
-        mysql_free_result($result);
+		print_r( $data );
+        mysqli_free_result($result);
         return $data;
     }
     
     public function insert($table, $data)
     {
-        $link =& self::connection();
+        $link = self::connection();
         $fields = '';
         $values = '';
         foreach ($data as $col => $value) {
             $fields .= sprintf("`%s`,", $col);
-            $values .= sprintf("'%s',", mysql_real_escape_string($value));
+            $values .= sprintf("'%s',", mysqli_real_escape_string($link, $value));
         }
         $fields = substr($fields, 0, -1);
         $values = substr($values, 0, -1);
         $sql    = sprintf("INSERT INTO %s (%s) VALUES (%s)", $table, $fields, $values);
         self::set('last_query', $sql);
-        if (!mysql_query($sql)) {
-            throw new Exception('Error executing MySQL query: ' . $sql . '. MySQL error ' . mysql_errno() . ': ' . mysql_error());
+        if (!mysqli_query($link, $sql)) {
+            throw new Exception('Error executing MySQL query: ' . $sql . '. MySQL error ' . mysqli_errno() . ': ' . mysqli_error());
         } else {
-            self::set('insert_id', mysql_insert_id());
+            self::set('insert_id', mysqli_insert_id());
             return true;
         }
     }
@@ -270,16 +282,16 @@ class Mysql
         if (empty(self::$where)) {
             throw new Exception("Where is not set. Can't update whole table.");
         } else {
-            $link =& self::connection();
+            $link = self::connection();
             $update = '';
             foreach ($info as $col => $value) {
-                $update .= sprintf("`%s`='%s', ", $col, mysql_real_escape_string($value));
+                $update .= sprintf("`%s`='%s', ", $col, mysqli_real_escape_string($link, $value));
             }
             $update = substr($update, 0, -2);
             $sql    = sprintf("UPDATE %s SET %s%s", $table, $update, self::extra());
             self::set('last_query', $sql);
-            if (!mysql_query($sql)) {
-                throw new Exception('Error executing MySQL query: ' . $sql . '. MySQL error ' . mysql_errno() . ': ' . mysql_error());
+            if (!mysqli_query($link, $sql)) {
+                throw new Exception('Error executing MySQL query: ' . $sql . '. MySQL error ' . mysqli_errno() . ': ' . mysqli_error());
             } else {
                 return true;
             }
@@ -291,11 +303,11 @@ class Mysql
         if (empty(self::$where)) {
             throw new Exception("Where is not set. Can't delete whole table.");
         } else {
-            $link =& self::connection();
+            $link = self::connection();
             $sql = sprintf("DELETE FROM %s%s", $table, self::extra());
             self::set('last_query', $sql);
-            if (!mysql_query($sql)) {
-                throw new Exception('Error executing MySQL query: ' . $sql . '. MySQL error ' . mysql_errno() . ': ' . mysql_error());
+            if (!mysqli_query($link, $sql)) {
+                throw new Exception('Error executing MySQL query: ' . $sql . '. MySQL error ' . mysqli_errno() . ': ' . mysqli_error());
             } else {
                 return true;
             }

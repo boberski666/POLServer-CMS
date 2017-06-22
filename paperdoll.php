@@ -2,20 +2,22 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require_once('include/config.php');
-require_once('include/mysql.php');
+include 'config.php';
 
 if (!isset($_GET['name'])) {
-    die("Name not set!");
+    echo "Name not set!";
+    die();
 }
-$n = str_replace("-", " ", $_GET['name']);
+$n = $_GET['name'];
 unset($_GET['name']);
 $mulpath = "uofiles/";
 
-$db = new MySQL();
+$db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
-if (!(list($charID, $charName, $charTitle, $charRace, $charBodyType, $charFemale, $charBodyHue) = $mysql->where(array('char_name' => $n))->get(TBL_CHARS, array('char_id', 'char_name', 'char_title', 'char_race', 'char_body', 'char_female', 'char_bodyhue'))))
+$result = mysqli_query($db, "SELECT char_id,char_name,char_title,char_race,char_body,char_female,char_bodyhue FROM " . TBL_CHARS . " WHERE char_name LIKE '$n'");
+if (!(list($charID, $charName, $charTitle, $charRace, $charBodyType, $charFemale, $charBodyHue) = mysqli_fetch_row($result)))
     die();
+mysqli_free_result($result);
 
 // Insert body into variables
 $indexA  = $charBodyType;
@@ -36,13 +38,12 @@ if ($indexA == 667)
 $hueA    = $charBodyHue;
 $isgumpA = "1";
 
-$result = $mysql->where(array('id', $charID))->get(TBL_CHARS_LAYERS, array('item_id', 'item_hue', 'layer_id'));
-
+$result = mysqli_query($db, "SELECT item_id,item_hue,layer_id FROM " . TBL_CHARS_LAYERS . " WHERE char_id=$charID");
 $items  = array(
     array()
 );
 $num    = 0;
-foreach ($result as $row) {
+while ($row = mysqli_fetch_row($result)) {
     $items[0][$num] = $row[0];
     $items[1][$num] = $row[1];
     if ($row[2] == 13) {
@@ -50,6 +51,9 @@ foreach ($result as $row) {
     } else
         $items[2][$num++] = $row[2];
 }
+
+mysqli_free_result($result);
+mysqli_close($db);
 
 array_multisort($items[2], SORT_ASC, SORT_NUMERIC, $items[0], SORT_ASC, SORT_NUMERIC, $items[1], SORT_ASC, SORT_NUMERIC);
 
