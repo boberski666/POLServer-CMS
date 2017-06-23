@@ -1,15 +1,17 @@
 Options -MultiViews
 RewriteEngine On
+
+RewriteBase /
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 
-RewriteRule ^gump/id/([^/]*)/hue/([^/]*)/?$ utils/gumpart.php?id=$1&hue=$2 [QSA]
-RewriteRule ^gump/id/([^/]*)/?$ utils/gumpart.php?id=$1&hue=0 [QSA]
-RewriteRule ^gump/?$ utils/gumpart.php?id=0&hue=0 [QSA]
+RewriteRule ^gump/id/([^/]*)/hue/([^/]*)/?$ gfx.php?mode=gumpart&id=$1&hue=$2 [QSA]
+RewriteRule ^gump/id/([^/]*)/?$ gfx.php?mode=gumpart&id=$1&hue=0 [QSA]
+RewriteRule ^gump/?$ gfx.php?mode=gumpart&id=0&hue=0 [QSA]
 
-RewriteRule ^art/id/([^/]*)/?$ utils/artfix.php?id=$1&hue=$2 [QSA]
-RewriteRule ^art/id/([^/]*)/hue/([^/]*)/?$ utils/artfix.php?id=$1&hue=0 [QSA]
-RewriteRule ^art/?$ utils/artfix.php?id=0&hue=0 [QSA]
+RewriteRule ^art/id/([^/]*)/hue/([^/]*)/?$ gfx.php?mode=artfix&id=$1&hue=$2 [QSA]
+RewriteRule ^art/id/([^/]*)/?$ gfx.php?mode=artfix&id=$1&hue=0 [QSA]
+RewriteRule ^art/?$ gfx.php?mode=artfix&id=0&hue=0 [QSA]
 
 RewriteRule ^paperdoll/name/([^/]*)/?$ paperdoll.php?name=$1 [QSA]
 RewriteRule ^paperdoll/?$ paperdoll.php [QSA]

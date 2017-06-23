@@ -18,16 +18,16 @@ if (isset($_GET["id"])) {
             $hue = intval($hue);
     }
     $show = isset($_GET["show"]) ? $_GET["show"] : true;
-    if (!(file_exists("../images/art/art_" . $id . "_" . $hue . ".png"))) {
-        include("../utils/art.php");
+    if (!(file_exists("images/art/art_" . $id . "_" . $hue . ".png"))) {
+        include("utils/art.php");
         createart($id, $hue, 0);
     }
-    if (!(file_exists("../images/art/fixedart_" . $id . "_" . $hue . ".png")))
+    if (!(file_exists("images/art/fixedart_" . $id . "_" . $hue . ".png")))
         fixart($id, $hue, $show);
     else {
         Header("Content-type: image/png");
         Header("Content-disposition: inline; filename=art_" . $id . "_" . $hue . ".png");
-        $img   = imagecreatefrompng("../images/art/fixedart_" . $id . "_" . $hue . ".png");
+        $img   = imagecreatefrompng("images/art/fixedart_" . $id . "_" . $hue . ".png");
         $black = imagecolorallocate($img, 0, 0, 0);
         imagecolortransparent($img, $black);
         imagepng($img);
@@ -38,24 +38,24 @@ if (isset($_GET["id"])) {
 
 function fixart($id, $hue, $show)
 {
-    if (!(file_exists("../images/art/fixedart_" . $id . "_" . $hue . ".png"))) {
-        if (!(file_exists("../images/art/art_" . $id . "_" . $hue . ".png"))) {
-            include("../utils/art.php");
+    if (!(file_exists("images/art/fixedart_" . $id . "_" . $hue . ".png"))) {
+        if (!(file_exists("images/art/art_" . $id . "_" . $hue . ".png"))) {
+            include("utils/art.php");
             createart($id, $hue, 0);
         }
-        $imgurl = "../images/art/art_" . $id . "_" . $hue . ".png";
+        $imgurl = "images/art/art_" . $id . "_" . $hue . ".png";
         $img    = imagecreatefrompng("$imgurl");
         $box    = imageTrimBox($img);
         $img2   = imagecreatetruecolor($box['w'], $box['h']);
         imagecopy($img2, $img, 0, 0, $box['l'], $box['t'], $box['w'], $box['h']);
-        imagepng($img2, '../images/art/fixedart_' . $id . '_' . $hue . '.png', 0, NULL);
+        imagepng($img2, 'images/art/fixedart_' . $id . '_' . $hue . '.png', 0, NULL);
         imagedestroy($img);
         imagedestroy($img2);
     }
     if ($show == 1) {
         Header("Content-type: image/png");
         Header("Content-disposition: inline; filename=art_" . $id . "_" . $hue . ".png");
-        $img   = imagecreatefrompng("../images/art/fixedart_" . $id . "_" . $hue . ".png");
+        $img   = imagecreatefrompng("images/art/fixedart_" . $id . "_" . $hue . ".png");
         $black = imagecolorallocate($img, 0, 0, 0);
         imagecolortransparent($img, $black);
         imagepng($img);
