@@ -8,13 +8,14 @@ if (!isset($_GET['name'])) {
     echo "Name not set!";
     die();
 }
-$n = $_GET['name'];
+$n = str_replace("-", " ", $_GET['name']);
+
 unset($_GET['name']);
 $mulpath = "uofiles/";
 
 $db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
-$result = mysqli_query($db, "SELECT char_id,char_name,char_title,char_race,char_body,char_female,char_bodyhue FROM " . TBL_CHARS . " WHERE char_name LIKE '$n'");
+$result = mysqli_query($db, "SELECT `char_id`,`char_name`,`char_title`,`char_race`,`char_body`,`char_female`,`char_bodyhue` FROM `" . TBL_CHARS . "` WHERE `char_name` LIKE '$n'");
 if (!(list($charID, $charName, $charTitle, $charRace, $charBodyType, $charFemale, $charBodyHue) = mysqli_fetch_row($result)))
     die();
 mysqli_free_result($result);
@@ -38,7 +39,7 @@ if ($indexA == 667)
 $hueA    = $charBodyHue;
 $isgumpA = "1";
 
-$result = mysqli_query($db, "SELECT item_id,item_hue,layer_id FROM " . TBL_CHARS_LAYERS . " WHERE char_id=$charID");
+$result = mysqli_query($db, "SELECT `item_id`,`item_hue`,`layer_id` FROM `" . TBL_CHARS_LAYERS . "` WHERE char_id=$charID");
 $items  = array(
     array()
 );
