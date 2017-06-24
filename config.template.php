@@ -9,6 +9,7 @@ define("DB_PASS","");
 /*Character Tables*/
 define("TBL_CHARS", "characters");
 define("TBL_CHARS_LAYERS", "characters_layers");
+define("TBL_CHARS_ONLINE", "characters_online");
 
 /*POL data*/
 define("POL_HOST", "localhost");
