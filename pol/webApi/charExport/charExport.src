@@ -23,8 +23,6 @@ program GlobalControl()
 			
 			Print("TRUNCATE TABLE "+settings.CharTable);
 			Print("TRUNCATE TABLE "+settings.CharLayers);
-			
-			index := 0;
 
 			foreach acct_name in ( ListAccounts() )
 				acct := FindAccount( acct_name );
@@ -45,7 +43,7 @@ program GlobalControl()
 								race := "Other";
 							endif
 						
-							mysql_query(db,"INSERT INTO "+settings.CharTable+" (char_id, char_name, char_title, char_race, char_body, char_female, char_bodyhue, char_public ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",array{index, charRef.name, charRef.title_prefix, race, charRef.trueobjtype, charRef.gender, charRef.truecolor, 0});
+							mysql_query(db,"INSERT INTO "+settings.CharTable+" (char_id, char_name, char_title, char_race, char_body, char_female, char_bodyhue, char_public ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",array{charRef.serial, charRef.name, charRef.title_prefix, race, charRef.trueobjtype, charRef.gender, charRef.truecolor, 0});
 							
 							SleepMS(5);
 							
@@ -54,17 +52,16 @@ program GlobalControl()
 								x := GetEquipmentByLayer(charRef, i);
 								
 								if ( (i == 0x0b) || (i == 0x10) || (i == 0x15) )
-									mysql_query(db,"INSERT INTO "+settings.CharLayers+" (char_id, layer_id, item_id, item_hue) VALUES (?, ?, ?, ?)",array{index, 0, x.objtype, x.color});
+									mysql_query(db,"INSERT INTO "+settings.CharLayers+" (char_id, layer_id, item_id, item_hue) VALUES (?, ?, ?, ?)",array{charRef.serial, 0, x.objtype, x.color});
 								else
-									mysql_query(db,"INSERT INTO "+settings.CharLayers+" (char_id, layer_id, item_id, item_hue) VALUES (?, ?, ?, ?)",array{index, i, x.objtype, x.color});
+									mysql_query(db,"INSERT INTO "+settings.CharLayers+" (char_id, layer_id, item_id, item_hue) VALUES (?, ?, ?, ?)",array{charRef.serial, i, x.objtype, x.color});
 								endif
 								
 								SleepMS(5);
 							endfor
 							
 						endif
-						
-						index := index + 1;
+
 						SleepMS(5);
 					endforeach
 				endif

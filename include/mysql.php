@@ -1,5 +1,4 @@
 <?php
-require_once('../config.php');
 
 class Mysql
 {
@@ -228,14 +227,14 @@ class Mysql
             $select = substr($cols, 0, -1);
         }
         $sql = sprintf("SELECT %s FROM `%s`%s", $select, $table, self::extra());
-
+		
 		$data = null;
 		
         self::set('last_query', $sql);
         if (!($result = mysqli_query($link, $sql))) {
             throw new Exception('Error executing MySQL query: ' . $sql . '. MySQL error ' . mysqli_errno() . ': ' . mysqli_error());
             $data = false;
-        } elseif (is_resource($result)) {
+        } else {
             $num_rows = mysqli_num_rows($result);
             self::set('num_rows', $num_rows);
             if ($num_rows === 0) {
@@ -248,10 +247,8 @@ class Mysql
                     $data[] = $row;
                 }
             }
-        } else {
-            $data = false;
-        }
-		print_r( $data );
+        } 
+
         mysqli_free_result($result);
         return $data;
     }

@@ -3,22 +3,34 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include 'config.php';
-
-if (!isset($_GET['name'])) {
-    echo "Name not set!";
+include_once('include/mysql.php');
+if (!isset($_GET['id'])) {
+    echo "ID not set!";
     die();
 }
-$n = str_replace("-", " ", $_GET['name']);
+$id = $_GET['id'];
 
-unset($_GET['name']);
+unset($_GET['id']);
 $mulpath = "uofiles/";
 
-$db = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
+$mysql = new MySQL();
+$result = null;
+try{
+	$result = $mysql->where('char_id', $id)->get(TBL_CHARS);
 
-$result = mysqli_query($db, "SELECT `char_id`,`char_name`,`char_title`,`char_race`,`char_body`,`char_female`,`char_bodyhue` FROM `" . TBL_CHARS . "` WHERE `char_name` LIKE '$n'");
-if (!(list($charID, $charName, $charTitle, $charRace, $charBodyType, $charFemale, $charBodyHue) = mysqli_fetch_row($result)))
-    die();
-mysqli_free_result($result);
+}catch(Exception $e){
+	die('Caught exception: '. $e->getMessage());
+}
+	
+$charID = $result[0]['char_id'];
+$charName = $result[0]['char_name'];
+$charTitle = $result[0]['char_title'];
+$charRace = $result[0]['char_race'];
+$charBodyType = $result[0]['char_body'];
+$charFemale = $result[0]['char_female'];
+$charBodyHue = $result[0]['char_bodyhue'];
+$charPublic = $result[0]['char_public'];
+
 
 // Insert body into variables
 $indexA  = $charBodyType;
@@ -39,22 +51,24 @@ if ($indexA == 667)
 $hueA    = $charBodyHue;
 $isgumpA = "1";
 
-$result = mysqli_query($db, "SELECT `item_id`,`item_hue`,`layer_id` FROM `" . TBL_CHARS_LAYERS . "` WHERE char_id=$charID");
+try{
+	$result = $mysql->where('char_id', $id)->get(TBL_CHARS_LAYERS);
+}catch(Exception $e){
+	die('Caught exception: '. $e->getMessage());
+}
+
 $items  = array(
     array()
 );
 $num    = 0;
-while ($row = mysqli_fetch_row($result)) {
-    $items[0][$num] = $row[0];
-    $items[1][$num] = $row[1];
-    if ($row[2] == 13) {
+foreach ($result as $row) {
+    $items[0][$num] = $row['item_id'];
+    $items[1][$num] = $row['item_hue'];
+    if ($row['layer_id'] == 13) {
         $items[2][$num++] = 3.5; // Fix for tunic
     } else
-        $items[2][$num++] = $row[2];
+        $items[2][$num++] = $row['layer_id'];
 }
-
-mysqli_free_result($result);
-mysqli_close($db);
 
 array_multisort($items[2], SORT_ASC, SORT_NUMERIC, $items[0], SORT_ASC, SORT_NUMERIC, $items[1], SORT_ASC, SORT_NUMERIC);
 
