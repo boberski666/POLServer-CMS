@@ -1,4 +1,4 @@
-uofiles/*.mul
-images/gumpart/*.png
-images/art/*.png
-config.php
+www/uofiles/*.mul
+www/images/gumpart/*.png
+www/images/art/*.png
+www/config.php
