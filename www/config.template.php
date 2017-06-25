@@ -1,4 +1,7 @@
 <?php
+/*Page*/
+define("TITLE", "Ultima Online");
+
 /*Database*/
 define("DB_SERVER", "localhost");
 define("DB_PORT", "3306");

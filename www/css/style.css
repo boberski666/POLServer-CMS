@@ -1,0 +1,43 @@
+	/*Custom CSS Overrides*/
+	
+	body {
+	    font-family: 'Lato', sans-serif !important;
+	    background-color: transparent !important;
+	}
+	* {
+	    margin: 0;
+	    padding: 0;
+	}
+	html {
+	    background: url(../images/page.jpg) no-repeat center center fixed;
+	    -webkit-background-size: cover;
+	    -moz-background-size: cover;
+	    -o-background-size: cover;
+	    background-size: cover;
+	}
+	#page-wrap {
+	    width: 700px;
+		margin: 50px auto;
+		padding: 20px;
+		background: white;
+		-moz-box-shadow: 0 0 20px black;
+		-webkit-box-shadow: 0 0 20px black;
+		box-shadow: 0 0 20px black;
+	}
+	p {
+	    padding: 5px 0px 5px 0px;
+	    font-size: 14px;
+	    line-height: 1.5em;
+	    display: block;
+	    color: #000000;
+	}
+	a {
+	    font-size: 14px;
+	    outline: none;
+	    color: #000000;
+	    text-decoration: underline;
+	}
+	a:hover {
+	    text-decoration: underline;
+	    color: #ff0000;
+	}

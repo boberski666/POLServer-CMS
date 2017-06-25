@@ -9,7 +9,7 @@ $mysql = new MySQL();
 $result = null;
 
 try{
-	$result = $mysql->get(TBL_CHARS);
+	$result = $mysql->get(TBL_CHARS_ONLINE);
 }catch(Exception $e){
 	die('Caught exception: '. $e->getMessage());
 }
@@ -26,10 +26,9 @@ try{
 	<div id="page-wrap">
 	<?php
 		foreach ($result as $row) {
-			echo '<img src = "paperdoll.php?id='.$row['char_id'].'" style = "float: left; margin: 0 0 10px 10px;" />';
+			echo '<a href = "player.php?id='.$row['char_id'].'">'.$row['char_name'].'</a>&ensp;';
 		}
 	?>
-	<div style = "clear: both;"></div>
 	</div>
 </body>
 </html>
