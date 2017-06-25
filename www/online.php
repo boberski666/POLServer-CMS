@@ -15,20 +15,10 @@ try{
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title><?php echo TITLE; ?></title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
-	<div id="page-wrap">
-	<?php
-		foreach ($result as $row) {
-			echo '<a href = "player.php?id='.$row['char_id'].'">'.$row['char_name'].'</a>&ensp;';
-		}
-	?>
-	</div>
-</body>
-</html>
+<?php include 'header.php'; ?>
+<?php
+	foreach ($result as $row) {
+		echo '<a href = "player.php?id='.$row['char_id'].'">'.$row['char_name'].'</a>&ensp;';
+	}
+?>
+<?php include 'footer.php'; ?>

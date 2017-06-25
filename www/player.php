@@ -13,16 +13,6 @@ $id = $_GET['id'];
 unset($_GET['id']);
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title><?php echo TITLE; ?></title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
-	<div id="page-wrap">
-		<?php echo '<center><img src = "paperdoll.php?id='.$id.'" style = "float: left; margin: 0 0 10px 10px;" /></center>'; ?>
-	</div>
-</body>
-</html>
+<?php include 'header.php'; ?>
+<?php echo '<center><img src = "paperdoll.php?id='.$id.'" style = "float: left; margin: 0 0 10px 10px;" /></center>'; ?>
+<?php include 'footer.php'; ?>

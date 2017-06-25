@@ -6,16 +6,6 @@ include 'config.php';
 include_once('include/mysql.php');
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title><?php echo TITLE; ?></title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
-<div id="page-wrap">
+<?php include 'header.php'; ?>
 
-</div>
-</body>
-</html>
+<?php include 'footer.php'; ?>
