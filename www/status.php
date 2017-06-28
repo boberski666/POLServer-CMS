@@ -1,6 +1,6 @@
 <?php
-require_once('include/polpackunpack.php');
-require_once('config.php');
+require_once('libs/PolPackUnpack.php');
+require_once('cache/config.map');
 
 if (($fsocked = @fsockopen(POL_HOST, POL_AUX_PORT, $errno, $errstr, 2)) === FALSE) {
     echo '<p>Status: <b><span style = "color: #ff0000;">DOWN</span></b></p>';

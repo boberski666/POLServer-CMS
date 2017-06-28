@@ -1,0 +1,31 @@
+[polserver]
+POL_HOST = localhost
+POL_PUBLIC_HOST = uo.hyeah.pl
+POL_PORT = 2594
+POL_AUX_PORT = 5066
+POL_AUX_PASSWORD = password
+
+[db]
+DB_NAME = name
+DB_HOST = localhost
+DB_USER = user
+DB_PASSWORD = pass
+DB_TYPE = mysql
+DB_PORT = 3306
+
+[domain]
+DOMAIN = http://domain.name/
+DOMAIN_SHORT = domain.name
+
+[meta]
+SITE_NAME = Site Name
+AUTHOR = Author
+
+[debug]
+ALLOW_DEBUG = 1
+
+[site]
+TEMPLATE = site
+
+[admin]
+ADMIN_TEMPLATE = admin

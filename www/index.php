@@ -1,11 +1,26 @@
+<?php header('Access-Control-Allow-Origin: *'); ?>
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+	error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_DEPRECATED ^ E_STRICT);
 
-include 'config.php';
-include_once('include/mysql.php');
-?>
-
-<?php include 'header.php'; ?>
-
-<?php include 'footer.php'; ?>
+	require('core/Config.class.php');
+	Config::load();
+	
+	require_once('core/AutoLoader.class.php');
+	AutoLoader::getInstance();
+	
+	Session::getInstance();
+	require_once('core/RB.class.php');
+	R::setup( 'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD );
+	
+	R::ext('xdispense', function( $type ){ 
+        return R::getRedBean()->dispense( $type ); 
+    });
+	
+	$view = new View();
+	$route = new Route();
+	
+	$raw=new Raw($route);
+	$raw->check();
+	
+	$unicornEngine=new UnicornEngine($view, $route);
+	$unicornEngine->run();

@@ -1,0 +1,12 @@
+<FilesMatch "\.tpl|.ini|.map$">
+	Order allow,deny
+	Deny from all
+</FilesMatch>
+
+Options +FollowSymLinks  
+RewriteEngine On
+
+RewriteBase /admin/
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f  
+RewriteRule ^(.*)$ index.php?route=$1 [QSA,L]

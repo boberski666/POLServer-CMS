@@ -1,0 +1,88 @@
+@charset "utf-8";
+/* CSS Document */
+
+html * {
+   color: #069 !important;
+   font-family: Arial !important;
+}
+
+#nav {
+	width: 100%;
+	float: left;
+	margin: 0 0 3em 0;
+	padding: 0;
+	list-style: none;
+	background-color: #f2f2f2;
+	border-bottom: 1px solid #ccc; 
+	border-top: 1px solid #ccc; }
+#nav li {
+	float: left; }
+#nav li a {
+	display: block;
+	padding: 8px 15px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #069;
+	border-right: 1px solid #ccc; }
+#nav li a:hover {
+	color: #c00;
+	background-color: #fff; }
+
+#component {
+	width: 100%;
+	margin: 0 0 3em 0;
+	padding: 0;
+	list-style: none;
+	background-color: #f2f2f2;
+	border-bottom: 1px solid #ccc; 
+	border-top: 1px solid #ccc; }
+#component li {
+	border-bottom: 1px solid #ccc;
+	padding-left: 20px;
+}
+#component h2 {
+	margin-bottom: 10px;
+	margin-top: 0px;
+}
+
+/**** Form Section ****/
+.appnitro
+{
+	font-family:Lucida Grande, Tahoma, Arial, Verdana, sans-serif;
+	font-size:small;
+}
+
+.appnitro li
+{
+	width:100%;
+}
+
+form ul
+{
+	font-size:100%;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	width:100%;
+}
+
+form li
+{
+	display:block;
+	margin:0;
+	padding:4px 5px 2px 9px;
+	position:relative;
+}
+
+form li:after
+{
+	clear:both;
+	content:".";
+	display:block;
+	height:0;
+	visibility:hidden;
+}
+
+.element {
+	width: 99%;
+}

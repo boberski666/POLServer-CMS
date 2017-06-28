@@ -1,0 +1,193 @@
+#debug{
+	margin:10px 8px 10px 8px;
+	border:1px solid #ddd;
+	-moz-box-shadow:0 0 15px #222;
+	-webkit-box-shadow:0 0 15px #222;
+	box-shadow:0 0 15px #222;
+	padding:10px;
+	padding-bottom:15px;
+	text-align:left;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	color:#626262;
+	background-color:rgba(255, 255, 255, 0.7);
+	position:relative
+}
+
+#debug, #debug td, #debug h1{
+	font:11px/1.3 Arial, Tahoma, Verdana, sans-serif;
+	font-family:Arial, Tahoma, Verdana, sans-serif;
+	line-height: 1.3;
+	font-size:11px;
+	empty-cells:show
+}
+
+#debug .debug_details > div, #debug .debug_details > div > div{
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	padding:4px 6px 4px 6px;
+	margin-bottom:5px;
+	border:solid 1px #D3D3D3;
+	background:rgba(255,255,255,.8)
+}
+
+#debug .debug_details > div:last-child{
+	margin-bottom:11px
+}
+
+#debug .debug_details div > div.file_info{
+	border-color:#D3D3D3
+}
+
+#debug .debug_details div.query_ok, #debug .debug_details div.query_ok div{
+	border-color:#0F0
+}
+
+#debug .debug_details div.query_error, #debug .debug_details div.query_error div{
+	border-color:#F00
+}
+
+#debug div.debug_show_details{
+	background-color:rgba(102,158,255,.6);
+/*	margin-left:-10px;
+	margin-right:-10px;
+	padding:1px 0;
+	margin-bottom:-10px;*/
+	position:absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	color:#FFF;
+	border-top:#ddd solid 1px;
+	-moz-border-radius:0 0 4px 4px;
+	-webkit-border-radius:0 0 4px 4px;
+	border-radius:0 0 4px 4px;
+	cursor:pointer;
+	text-align:center;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-o-user-select:none;
+	user-select:none;
+	font-size:13px;
+	-moz-box-shadow:0 -1px 3px #bbb;
+	-webkit-box-shadow:0 -1px 3px #bbb;
+	box-shadow:0 -1px 3px #bbb
+}
+
+#debug div.debug_show_details:hover{
+	background-color:rgba(102,158,255,.85)
+}
+
+#debug div.debug_show_details span{
+	font-size:11px;
+	margin-top:-3px;
+	display:inline-block;
+	vertical-align:middle;
+}
+
+#debug .debug_details table{
+	background:url(../images/debug/database.png) no-repeat -1px 2px !important;
+	padding-left:12px
+}
+
+#debug .debug_details div .sql_error {
+	color:#E00;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+	border-radius:0;
+	margin-top:5px;
+	margin-left:-6px;
+	margin-right:-6px;
+	margin-bottom:-3px;
+	padding-left:25px;
+	border:none;
+	border-top:dashed 1px;
+}
+
+#debug .debug_details div .file_info{
+	color:#666 !important;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+	border-radius:0;
+	margin-top:5px;
+	margin-left:-6px;
+	margin-right:-6px;
+	margin-bottom:-4px;
+	padding-left:20px;
+	border:none;
+	border-top:dashed 1px;
+	background:url(../images/debug/script.png) no-repeat 3px 3px !important;
+	position:relative
+}
+
+#debug .debug_details div .file_info > div:first-child{
+	float:left
+}
+
+#debug .debug_details div .file_info > div.php{
+	float:right;
+	color:#00B;
+	padding-left:5px
+}
+
+#debug .debug_details div .time{
+	display:table-cell;
+	float:right;
+	width:5%;
+	background:#F00;
+	text-align:center
+}
+
+#debug ul{
+	list-style-type:none;
+	text-shadow:#FFF 0 0 2px;
+	margin-bottom:5px
+}
+
+#debug ol {
+	margin-left:15px
+}
+
+#debug ul li {
+	list-style-image:none
+}
+
+#debug .ajax_debuger_show{
+	position:absolute;
+	right:0;
+	top:0;
+	text-align:center;
+	background:rgba(102,158,255,.5);
+	border-left:1px solid #ddd;
+	border-bottom:1px solid #ddd;
+	-moz-border-radius:0 5px 0 5px;
+	-webkit-border-radius:0 5px 0 5px;
+	border-radius:0 5px 0 5px;
+	color:#FFF;
+	padding:3px 6px;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-o-user-select:none;
+	user-select:none;
+	-moz-box-shadow:-1px 1px 2px #999;
+	-webkit-box-shadow:-1px 1px 2px #999;
+	box-shadow:-1px 1px 3px #bbb
+}
+
+#debug .ajax_debuger_show a{
+	color:#FFF;
+	padding:0 5px;
+	display:inline-block
+}
+
+#debug .ajax_debuger_show a:hover{
+	text-decoration:underline
+}
+
+.clear{
+	clear: both
+}

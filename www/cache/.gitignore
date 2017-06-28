@@ -1,0 +1,6 @@
+*
+
+!.gitignore
+!tpl_cache/
+!tpl_compiled/
+!tpl_config/
