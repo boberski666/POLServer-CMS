@@ -8,3 +8,10 @@
 <body>
 	<div id="logo"><img src = "/raw/logo" /></div>
 	<div id="page-wrap">
+		<div class="divTable">
+			<div class="divTableBody">
+				<div class="divTableRow">
+					<div class="divTableCell">
+						{shard_status}
+					</div>
+					<div class="divTableCell">

@@ -11,6 +11,8 @@ class View extends SmartyBC {
                         ->setCacheDir(ROOT_DIR . 'cache/tpl_cache')
                         ->setConfigDir(ROOT_DIR . 'cache/tpl_config')
                 ->debugging = false;
+				
+		$this->load (ROOT_DIR . 'plugins/modules/');
     }
 
     public function display($template = null, $rel = null, $cache_id = null, $compile_id = null, $parent = null) {
@@ -61,6 +63,22 @@ class View extends SmartyBC {
         $responseArr = $response->toArray();
         foreach ($responseArr as $key => $value) {
             $this->assign($key, $value);
+        }
+    }
+	
+	public function load($path) {
+        $dir = opendir($path);
+        if ($dir != false) {
+            while (($file = readdir($dir)) !== false) {
+                if (is_file($path . $file)) {
+                    include ($path . $file);
+                } elseif (is_dir($path . $file) && $file != '.' && $file != '..') {
+                    $this->load($path . $file . DIRECTORY_SEPARATOR);
+                }
+            }
+            closedir($dir);
+        } else {
+            throw new Exception('Unable to read dir ' . $path);
         }
     }
 

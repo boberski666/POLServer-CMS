@@ -28,7 +28,6 @@ class AutoLoader {
         if (file_exists($this->cacheFileDir . self::CacheFile)) {
             $this->map = include($this->cacheFileDir . self::CacheFile);
         } else {
-            /** Jeśli plik nie istnieje to generujemy nowy */
             $this->generateMap();
         }
     }
