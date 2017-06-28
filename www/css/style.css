@@ -15,9 +15,13 @@
 	    -o-background-size: cover;
 	    background-size: cover;
 	}
+	#logo {
+	    width: 1020px;
+		margin: 20px auto;
+	}	
 	#page-wrap {
-	    width: 700px;
-		margin: 50px auto;
+	    width: 1020px;
+		margin: 30px auto;
 		padding: 20px;
 		background: white;
 		-moz-box-shadow: 0 0 20px black;

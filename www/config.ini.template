@@ -1,4 +1,5 @@
 [polserver]
+POL_NAME = name
 POL_HOST = localhost
 POL_PUBLIC_HOST = uo.hyeah.pl
 POL_PORT = 2594
