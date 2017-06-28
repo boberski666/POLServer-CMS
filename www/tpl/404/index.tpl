@@ -22,7 +22,7 @@
 		</div>
 		<!-- footer -->
 		<div id="footer">
-      	HellYeah - site <a href="http://hell-yeah.eu/" target="_blank" rel="nofollow">here</a>!
+      	{$smarty.const.SITE_NAME} - site <a href="{$smarty.const.DOMAIN}" target="_blank" rel="nofollow">here</a>!
       </div>
 	</div>
 {if isset($debug) && $debug == true}
