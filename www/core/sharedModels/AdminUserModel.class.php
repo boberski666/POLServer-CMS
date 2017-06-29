@@ -20,7 +20,6 @@ class AdminUserModel extends Model {
 	    } else {
 	    	return array(true, $user);
 	    }
-	       
     }
 
 }

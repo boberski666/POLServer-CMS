@@ -10,7 +10,7 @@ class LogoutController extends Controller {
 			$s->unsetAttribute('username');
 			$s->unsetAttribute('rank');
 			
-			$s->setAttribute('msg', 'Wylogowano!');
+			$s->setAttribute('msg', 'Signed out!');
 
 			header('Location: /admin/');
 		} else {

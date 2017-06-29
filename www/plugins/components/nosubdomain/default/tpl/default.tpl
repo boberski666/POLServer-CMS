@@ -1,1 +1,1 @@
-{$_message_}
+{include file='mysql:home.htm'}
