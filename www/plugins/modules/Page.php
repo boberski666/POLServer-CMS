@@ -25,8 +25,8 @@ class Smarty_Resource_Mysql extends Smarty_Resource_Custom
             $source = $pageData['source'];
             $mtime  = $pageData['modified'];
         } else {
-            $source = null;
-            $mtime  = null;
+            $source = '<center><h1>404 - Not Found</h1></center>';
+            $mtime  = date('Y-m-d G:i:s');
         }
     }
 }

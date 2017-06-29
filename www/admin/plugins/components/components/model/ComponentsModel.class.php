@@ -13,6 +13,28 @@ class ComponentsModel extends Model {
 			$inst->canUninstall = false;
 			
 			R::store( $inst );
+			
+			$inst = R::dispense( 'components' );
+			$inst->name = 'Pages';
+			$inst->url = 'page/';
+			$inst->tables = 'pages';
+			$inst->version = 'Ver. 1.0';
+			$inst->type = 1;
+			$inst->subdomain = 'nosubdomain';
+			$inst->canUninstall = false;
+			
+			R::store( $inst );
+			
+			$inst = R::dispense( 'components' );
+			$inst->name = 'Pages';
+			$inst->url = 'page/';
+			$inst->tables = 'pages';
+			$inst->version = 'Ver. 1.0';
+			$inst->type = 2;
+			$inst->subdomain = 'nosubdomain';
+			$inst->canUninstall = false;
+			
+			R::store( $inst );
         });
     }
 	

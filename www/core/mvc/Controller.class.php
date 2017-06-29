@@ -20,7 +20,7 @@ class Controller {
             $this->$param();
 		} else if (method_exists($this, 'switcher')) {
 			ActionMapping::$actionDebug[] = 'switcher';
-            $this->switcher($param);
+            $this->switcher(str_replace('Action', '', $param));
         } else {
         	ActionMapping::$actionDebug[] = 'defaultAction';
             $this->defaultAction();

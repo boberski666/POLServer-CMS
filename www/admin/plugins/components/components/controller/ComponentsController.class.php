@@ -18,7 +18,6 @@ class ComponentsController extends Controller {
 			$this->display->addParameter("_menu_",  $m->loadByType(1));
 			$this->display->addParameter("_admin_",  $m->loadByType(1));
 			$this->display->addParameter("_site_",  $m->loadByType(2));
-			
 		}
     }
 
