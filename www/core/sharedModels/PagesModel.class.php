@@ -4,6 +4,7 @@ class PagesModel extends Model {
         parent::__construct('pages', function() {
         	$inst = R::xdispense( 'pages' );
 			$inst->name = 'home.htm';
+			$inst->title = 'Home';
 			$inst->source = '<p style = "text-align:center;"><img src = "/images/dragon.png" style = "width: 300px; height: 248px;" /></p>';
 			$inst->modified = date('Y-m-d G:i:s');
 			$inst->canDelete = 0;
