@@ -3,12 +3,17 @@
 class Model {
     private $model = null;
 	private $modelName = null;
+	private $install = null;
 	
     public function __construct($modelName, $install) {
-		if ( !count( R::find( $modelName ) ) ) $install();
-
+		$this->install = $install;
 		$this->modelName = $modelName;
     }
+	
+	public function install() {
+		if ( !count( R::find( $this->modelName ) ) )
+			call_user_func($this->install);
+	}
 
     public function toArray() {
         $r = array();
