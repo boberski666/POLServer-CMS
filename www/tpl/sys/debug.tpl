@@ -1,34 +1,34 @@
 <link rel="stylesheet" href="{$smarty.const.DOMAIN|cat:'/tpl/sys/css/debug.css'}" media="all" type="text/css" />
 <div id=debug>
 	<div class=ajax_debuger_show>
-		<a href = "javascript: tplDebug();">Debugger szablonów</a>
+		<a href = "javascript: tplDebug();">Template debugger</a>
 	</div>
 	<ul>
 		{if !empty($debug_exception)}
 			<li style="font-weight:bold;color:red;text-shadow:1px 1px 0 #fff">Houston, we have a problem: {$debug_exception.info}</li>
 			<ol style="color:red;text-shadow:1px 1px 0 #fff">
-				<li><strong>Komunikat:</strong> {$debug_exception.message}</li>
-				<li><strong>W pliku:</strong> {$debug_exception.file}</li>
-				<li><strong>W linii:</strong> {$debug_exception.line}</li>
+				<li><strong>Message:</strong> {$debug_exception.message}</li>
+				<li><strong>File:</strong> {$debug_exception.file}</li>
+				<li><strong>Line:</strong> {$debug_exception.line}</li>
 			</ol>
 		{/if}
 		{if $sql_log.totalQueries}
-			<li><strong>Czas zapytań:</strong> {$sql_log.totalTime|default:0} ms</li>
-			<li><strong>Liczba zapytań:</strong> {$sql_log.totalQueries|@count}</li>
-			{if $sql_log.totalErrors > 0}<li style="color:red;"><strong>Liczba błędów:</strong> {$sql_log.totalErrors}</li>{/if}
+			<li><strong>Time:</strong> {$sql_log.totalTime|default:0} ms</li>
+			<li><strong>Queries:</strong> {$sql_log.totalQueries|@count}</li>
+			{if $sql_log.totalErrors > 0}<li style="color:red;"><strong>Error count:</strong> {$sql_log.totalErrors}</li>{/if}
 		{/if}
-		<li><strong>Kontrolery:</strong>
+		<li><strong>Controllers:</strong>
 		{foreach from=$controller_log item=c name=c}
 			{$c}{if not $smarty.foreach.c.last},{/if}
 		{/foreach}
 		</li>
-		<li><strong>Akcje:</strong>
+		<li><strong>Actions:</strong>
 		{foreach from=$action_log item=a name=a}
 			{$a}{if not $smarty.foreach.a.last},{/if}
 		{/foreach}
 		</li>
-		<li><strong>Subdomena:</strong>
-			{if !empty($subdomain_log)}{$subdomain_log}{else}brak{/if}
+		<li><strong>Subdomain:</strong>
+			{if !empty($subdomain_log)}{$subdomain_log}{else}none{/if}
 		</li>
 </ul>
 {if $sql_log.totalQueries|@count >0}
