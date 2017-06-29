@@ -16,11 +16,17 @@
 	    background-size: cover;
 	}
 	#logo {
-	    width: 1020px;
+	    max-width: 1020px;
+	    width: 100%;
 		margin: 20px auto;
 	}	
+	#logo img {
+	    max-width: 1020px;
+	    width: 100%;
+	}
 	#page-wrap {
-	    width: 1020px;
+	    max-width: 1020px;
+	    width: 100%;
 		margin: 30px auto;
 		padding: 20px;
 		background: white;

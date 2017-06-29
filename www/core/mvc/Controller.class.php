@@ -16,7 +16,7 @@ class Controller {
 
     public function doAction($param) {
         if (method_exists($this, $param)) {
-			ActionMapping::$actionDebug[] = $param.'Action';
+			ActionMapping::$actionDebug[] = $param;
             $this->$param();
 		} else if (method_exists($this, 'switcher')) {
 			ActionMapping::$actionDebug[] = 'switcher';

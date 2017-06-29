@@ -16,7 +16,7 @@
 		<!-- content -->
 		<div id="content">
 			<ul class="nav">
-         	<li class="home"><a href="http://hell-yeah.eu/" rel="nofollow">Home Page</a></li>
+         	<li class="home"><a href="{$smarty.const.DOMAIN}" rel="nofollow">Home Page</a></li>
          </ul>
          <p>Unless creepy emptiness was what you were looking for, this place has nothing that you want.</p>
 		</div>
