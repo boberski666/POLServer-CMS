@@ -68,6 +68,10 @@ class Model {
 	public function prepare() {
         $this->model = R::dispense( $this->modelName );
     }
+	
+	public function xprepare() {
+        $this->model = R::xdispense( $this->modelName );
+    }
     
 	public function save() {
         return R::store($this->model);
