@@ -1,14 +1,20 @@
-﻿<script type="text/javascript">
-{literal} 
-    var elems = document.getElementsByClassName('confirmation');
-    var confirmIt = function (e) {
-        if (!confirm('Jesteś pewien, że chcesz wykonać wybraną operację?')) e.preventDefault();
-    };
-    for (var i = 0, l = elems.length; i < l; i++) {
-        elems[i].addEventListener('click', confirmIt, false);
-    }
-{/literal}
+﻿    <div class="footer">
+             <div class="row">
+                <div class="col-lg-12" >
+                    &copy; 2017 - {$smarty.const.SITE_NAME}
+                </div>
+        </div>
+        </div>
+          
 
-</script>
-</BODY>
-</HTML>
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="/admin/assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="/admin/assets/js/bootstrap.min.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="/admin/assets/js/custom.js"></script>
+
+</body>
+</html>

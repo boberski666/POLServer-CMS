@@ -14,6 +14,12 @@
 	R::ext('xdispense', function( $type ){ 
         return R::getRedBean()->dispense( $type ); 
     });
+    
+    $view = new View();
+	$route = new Route();
 	
-	$unicornEngine = new UnicornEngine(new View(), new Route());
+    $raw=new Raw($route);
+	$raw->check();
+	
+	$unicornEngine=new UnicornEngine($view, $route);
 	$unicornEngine->run();

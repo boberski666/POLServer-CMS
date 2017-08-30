@@ -1,11 +1,13 @@
 ﻿<form method="POST" action="/admin/login/">
-	<div align="center">
+	<div class="form-group" align="center">
 		{if isset($_message_)}
-			<p>{$_message_}</p>
+			<p class="help-block">{$_message_}</p>
 		{/if}
-		Login: <input type="text" name="username" size="15" /><br /><br />
-		Hasło: <input type="password" name="password" size="15" /><br />
+		<label>Login</label>
+        <input type="text" name="username" size="15" class="form-control" />
+		<label>Password</label>
+        <input type="password" name="password" size="15" class="form-control" />
 
-		<p><input type="submit" value="Zaloguj" /></p>
+		<br/><input type="submit" value="Log In" class="btn btn-default"/>
 	</div>
 </form>
