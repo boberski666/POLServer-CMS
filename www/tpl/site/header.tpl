@@ -11,7 +11,7 @@
 		<div class="divTable">
 			<div class="divTableBody">
 				<div class="divTableRow">
-					<div class="divTableCell">
+					<div class="divTableCell" style="width: 250px;">
 						{shard_status}
 					</div>
 					<div class="divTableCell">

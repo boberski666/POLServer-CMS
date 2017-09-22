@@ -2,3 +2,4 @@ www/uofiles/*.mul
 www/images/gumpart/*.png
 www/images/art/*.png
 www/config.ini
+*Priv.*

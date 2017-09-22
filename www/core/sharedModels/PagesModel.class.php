@@ -5,7 +5,7 @@ class PagesModel extends Model {
         	$inst = R::xdispense( 'pages' );
 			$inst->name = 'home.htm';
 			$inst->title = 'Home';
-			$inst->source = '<p style = "text-align:center;"><img src = "/images/dragon.png" style = "width: 300px; height: 248px;" /></p>';
+			$inst->source = str_repeat('&ensp;', 256);
 			$inst->modified = date('Y-m-d G:i:s');
 			$inst->canDelete = 0;
 
