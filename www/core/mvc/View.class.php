@@ -12,10 +12,7 @@ class View extends SmartyBC {
                         ->setConfigDir(ROOT_DIR . 'cache/tpl_config')
                 ->debugging = false;
 
-        $this->compile_check = true;
-        $this->force_compile  = true;
 		$this->load (ROOT_DIR . 'plugins/modules/');
-        $this->clearCompiledTemplate();
     }
 
     public function display($template = null, $rel = null, $cache_id = null, $compile_id = null, $parent = null) {
