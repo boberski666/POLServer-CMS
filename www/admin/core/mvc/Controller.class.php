@@ -24,6 +24,9 @@ class Controller {
 				$s->unsetAttribute('msg');
 			}
 		} else {
+            $m = new ComponentsModel();
+            $this->display->addParameter("_menu_", $m->loadByType(1));
+            
             if (method_exists($this, $param)) {
                 ActionMapping::$actionDebug[] = $param;
                 $this->$param();

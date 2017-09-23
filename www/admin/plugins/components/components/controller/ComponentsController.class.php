@@ -6,7 +6,6 @@ class ComponentsController extends Controller {
 		$this->display->setComponentTpl("admin/plugins/components/components/tpl/default.tpl");
 			
 		$m = new ComponentsModel();
-		$this->display->addParameter("_menu_",  $m->loadByType(1));
 		$this->display->addParameter("_admin_",  $m->loadByType(1));
 		$this->display->addParameter("_site_",  $m->loadByType(2));
     }
@@ -14,9 +13,7 @@ class ComponentsController extends Controller {
 	public function uploadAction() {
 		$this->display->setComponentTpl("admin/plugins/components/components/tpl/upload.tpl");
 		
-		$m = new ComponentModel();
-		$this->display->addParameter("_menu_", $m->loadByType(1));
-		
+	
 		if (!empty($_FILES['com'])) {
 			try {
 				$upload = Upload::factory('upload', ROOT_ADMIN_DIR);
