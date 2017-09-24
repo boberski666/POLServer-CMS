@@ -3,4 +3,5 @@
    <li><a href="/admin/{$menuItem->url}"><i class="fa fa-gear "></i>{$menuItem->name}</a></li>
 {/foreach}
 <li><a href="/admin/rawsecure/sql" target="_blank"><i class="fa fa-gear "></i>SQL Admin</a></li>
+<li><a href="/admin/rawsecure/file" target="_blank"><i class="fa fa-gear "></i>File Manager</a></li>
 <li><a href="/admin/logout"><i class="fa fa-key "></i>Logout</a></li>
