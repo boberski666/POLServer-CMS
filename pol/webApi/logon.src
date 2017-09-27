@@ -1,6 +1,10 @@
-use uo;
-use sql;
+use os;
 
 program onLogon(who)
+
+    var script := Start_Script("charExport/charLogon", who);
+    if ( script.errortext )
+        SysLog("Error starting char logon ->"+script.errortext);
+    endif
 
 endprogram

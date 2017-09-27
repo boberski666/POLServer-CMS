@@ -20,9 +20,6 @@ program GlobalControl()
 			SleepMS(5);
 			mysql_query(db,"TRUNCATE TABLE "+settings.CharLayers);
 			SleepMS(5);
-			
-			Print("TRUNCATE TABLE "+settings.CharTable);
-			Print("TRUNCATE TABLE "+settings.CharLayers);
 
 			foreach acct_name in ( ListAccounts() )
 				acct := FindAccount( acct_name );
@@ -43,7 +40,7 @@ program GlobalControl()
 								race := "Other";
 							endif
 						
-							mysql_query(db,"INSERT INTO "+settings.CharTable+" (char_id, char_name, char_title, char_race, char_body, char_female, char_bodyhue, char_public ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",array{charRef.serial, charRef.name, charRef.title_prefix, race, charRef.trueobjtype, charRef.gender, charRef.truecolor, 0});
+							mysql_query(db,"INSERT INTO "+settings.CharTable+" (char_id, char_name, char_title, char_race, char_body, char_female, char_bodyhue, char_public, char_cmdlevel ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",array{charRef.serial, charRef.name, charRef.title_prefix, race, charRef.trueobjtype, charRef.gender, charRef.truecolor, 0, charRef.cmdlevel});
 							
 							SleepMS(5);
 							

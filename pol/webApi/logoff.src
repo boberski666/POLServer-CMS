@@ -1,6 +1,10 @@
-use uo;
-use sql;
+use os;
 
 program onLogoff( who )
+
+    var script := Start_Script("charExport/charLogoff", who);
+    if ( script.errortext )
+        SysLog("Error starting char logoff ->"+script.errortext);
+    endif
 
 endprogram
