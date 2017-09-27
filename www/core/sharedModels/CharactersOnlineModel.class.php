@@ -5,11 +5,16 @@ class CharactersOnlineModel extends Model {
         	$inst = R::xdispense( 'characters_online' );
 			$inst->charId = 1707739;
 			$inst->charName = 'Boberski';
-			$inst->loginTime = date('Y-m-d G:i:s');
+			$inst->loginTime = 1506543279;
+            $inst->charCmdlevel = 0;
 
 			R::store( $inst );
 			R::wipe( 'characters_online' );
         });
+    }
+        
+    public function loadOnlineCharacters() {
+        return parent::loadAll();
     }
     
 }

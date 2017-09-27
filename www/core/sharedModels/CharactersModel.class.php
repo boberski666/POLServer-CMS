@@ -11,6 +11,7 @@ class CharactersModel extends Model {
 			$inst->charFemale = 0;
 			$inst->charBodyhue = 33770;
 			$inst->charPublic = 1;
+			$inst->charCmdlevel = 0;
 			
 
 			R::store( $inst );

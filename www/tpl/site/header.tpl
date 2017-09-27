@@ -12,6 +12,8 @@
 			<div class="divTableBody">
 				<div class="divTableRow">
 					<div class="divTableCell" style="width: 250px;">
-						{shard_status}
+						{shard_status}<br/>
+                        <h3>Online</h3>
+                        {online_characters}
 					</div>
 					<div class="divTableCell">

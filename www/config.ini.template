@@ -1,6 +1,8 @@
 [polserver]
 POL_NAME = name
 POL_HOST = localhost
+POL_SSH_USER = user
+POL_SSH_PASSWORD = password
 POL_PUBLIC_HOST = uo.hyeah.pl
 POL_PORT = 2594
 POL_AUX_PORT = 5066
