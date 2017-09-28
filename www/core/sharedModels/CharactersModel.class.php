@@ -19,4 +19,8 @@ class CharactersModel extends Model {
         });
     }
     
+    public function loadAllCharacters() {
+        return parent::loadAll();
+    }
+    
 }

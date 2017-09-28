@@ -12,7 +12,7 @@ function print_online_characters($params, &$smarty) {
     else {
         $return = "<p>";
         foreach ($online as $value)
-           $return .= "<b>$value->char_name</b> since ".timestampToText(time() - $value->login_time);
+           $return .= "<b><a href = '/char/id/$value->char_id'>$value->char_name</a></b> since ".timestampToText(time() - $value->login_time);
         $return .= "</p>";
 	}
     
