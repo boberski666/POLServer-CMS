@@ -7,6 +7,8 @@
 </head>
 <body>
 	<div id="logo"><img src = "/raw/logo" /></div>
+	<div id="menu">{menu id=0}</div>
+    <div style = "clear: both;"></div>
 	<div id="page-wrap">
 		<div class="divTable">
 			<div class="divTableBody">

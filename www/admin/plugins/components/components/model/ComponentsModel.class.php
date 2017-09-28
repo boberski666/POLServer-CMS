@@ -35,6 +35,17 @@ class ComponentsModel extends Model {
 			$inst->canUninstall = false;
 			
 			R::store( $inst );
+            
+            $inst = R::dispense( 'components' );
+			$inst->name = 'Menu';
+			$inst->url = 'menu/';
+			$inst->tables = 'menu';
+			$inst->version = 'Ver. 1.0';
+			$inst->type = 2;
+			$inst->subdomain = 'nosubdomain';
+			$inst->canUninstall = false;
+			
+			R::store( $inst );
         });
     }
 	
