@@ -22,7 +22,7 @@ function print_shard_status($params, &$smarty) {
 		$return .= 'Uptime: <b>' . secondsToWords($data[1]) . '</b><br/>';
 		$return .= 'IP: <b>' . POL_PUBLIC_HOST  . '</b><br/>';
 		$return .= 'Port: <b>' . POL_PORT  . '</b><br/>';
-		$return .= 'Accounts: <b>' . $data[0] . '</b><br/>';
+		$return .= 'Accounts: <b>' . (isset($data[2])?$data[2]:'0') . '/' . $data[0] . '</b><br/>';
 	}
 	
 	return $return;

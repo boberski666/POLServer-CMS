@@ -1,0 +1,31 @@
+use uo;
+use sql;
+
+include ":webApi:settings";
+
+program GlobalControlOnlineExport()
+
+    var settings := GetSettingsCfgElem( "Settings" );
+    
+    while( 1 )
+        var db := mysql_connect(settings.DBHost,settings.DBUser,password := settings.DBPass);
+        
+        mysql_select_db(db,settings.DBName);
+        
+        mysql_query(db,"TRUNCATE TABLE "+settings.CharOnline);
+        
+        if( db )
+            foreach char in EnumerateOnlineCharacters()
+                if(char.cmdlevel  <= CInt(settings.OnlineExportMaxCmdLevel))
+                    var query := mysql_query(db,"INSERT INTO "+settings.CharOnline+" (char_id, char_name, login_time, char_cmdlevel ) VALUES (?, ?, ?, ?)", array{char.serial, char.name, POLCore().systime, char.cmdlevel});  
+                endif
+            endforeach
+        else
+            Print ("DBError: "+db.errortext);
+        endif
+        
+        mysql_close(db);
+        
+        Sleep(CInt(settings.CharExportDelay) * 60);
+	endwhile
+endprogram

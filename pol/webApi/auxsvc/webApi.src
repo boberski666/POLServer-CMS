@@ -33,15 +33,17 @@ program webApi(connection)
 endprogram
 
 function ServerStats()
-  var retvalue := array;
-  retvalue.append(CStr(len(ListAccounts())));
-  retvalue.append(CStr(polcore().uptime));
-  var tot := 0;
-  foreach chr in EnumerateOnlineCharacters()
-      tot := tot+1;
-  endforeach
-  retvalue.append(CStr(tot));
+    var settings := GetSettingsCfgElem( "Settings" );
+    var retvalue := array;
+    retvalue.append(CStr(len(ListAccounts())));
+    retvalue.append(CStr(polcore().uptime));
+    var tot := 0;
+    foreach char in EnumerateOnlineCharacters()
+        if(char.cmdlevel  <= CInt(settings.OnlineExportMaxCmdLevel))
+            tot := tot+1;
+        endif
+    endforeach
+    retvalue.append(CStr(tot));
 
-  return retvalue;
-
+    return retvalue;
 endfunction
