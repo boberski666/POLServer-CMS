@@ -41,7 +41,18 @@ class ComponentsModel extends Model {
 			$inst->url = 'menu/';
 			$inst->tables = 'menu';
 			$inst->version = 'Ver. 1.0';
-			$inst->type = 2;
+			$inst->type = 1;
+			$inst->subdomain = 'nosubdomain';
+			$inst->canUninstall = false;
+			
+			R::store( $inst );
+            
+            $inst = R::dispense( 'components' );
+			$inst->name = 'News';
+			$inst->url = 'news/';
+			$inst->tables = 'news';
+			$inst->version = 'Ver. 1.0';
+			$inst->type = 1;
 			$inst->subdomain = 'nosubdomain';
 			$inst->canUninstall = false;
 			
