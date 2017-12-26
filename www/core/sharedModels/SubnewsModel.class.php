@@ -4,6 +4,7 @@ class SubnewsModel extends Model {
         parent::__construct('subnews', function() {
         	$inst = R::xdispense( 'subnews' );
 			$inst->news = 0;
+			$inst->type = '';
 			$inst->scope = '';
 			$inst->changeText = '';
 			$inst->author = '';
@@ -11,6 +12,11 @@ class SubnewsModel extends Model {
 			R::store( $inst );
             R::wipe( 'subnews' );
         });
+    }
+    
+    public function loadSubnews($id = 0) {
+     	$sub = parent::loadByQuery( 'news = ?', [ $id ] );
+     	return $sub;
     }
     
 }

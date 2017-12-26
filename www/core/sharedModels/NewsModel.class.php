@@ -12,4 +12,28 @@ class NewsModel extends Model {
         });
     }
     
+    public function loadAllNewsASC() {
+        //$news = parent::loadAll();
+        $news = parent::loadByQuery('ORDER BY published ASC',[]);
+        
+        foreach ($news as &$value) {
+            $sub = new SubnewsModel();
+            $value['elements'] = $sub->loadSubnews($value->id);
+        }
+        
+        return $news;
+    }
+    
+    public function loadAllNewsDESC() {
+        //$news = parent::loadAll();
+        $news = parent::loadByQuery('ORDER BY published DESC',[]);
+        
+        foreach ($news as &$value) {
+            $sub = new SubnewsModel();
+            $value['elements'] = $sub->loadSubnews($value->id);
+        }
+        
+        return $news;
+    }
+    
 }

@@ -21,6 +21,7 @@ program webApi(connection)
 			
 			case(param)
         "status": connection.transmit(ServerStats());
+        "online": connection.transmit(ServerOnline());
         default: connection.transmit(0);
       endcase
 			
@@ -44,6 +45,19 @@ function ServerStats()
         endif
     endforeach
     retvalue.append(CStr(tot));
+
+    return retvalue;
+endfunction
+
+function ServerOnline()
+    var settings := GetSettingsCfgElem( "Settings" );
+    var retvalue := array;
+    var tot := 0;
+    foreach char in EnumerateOnlineCharacters()
+        if(char.cmdlevel  <= CInt(settings.OnlineExportMaxCmdLevel))
+            retvalue.append(CStr(char.serial)+"|"+CStr(char.name)+"|"+CStr(POLCore().systime)+"|"+CStr(char.cmdlevel));
+        endif
+    endforeach
 
     return retvalue;
 endfunction
