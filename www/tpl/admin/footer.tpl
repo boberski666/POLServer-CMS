@@ -15,6 +15,12 @@
     <script src="/admin/assets/js/bootstrap.min.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="/admin/assets/js/custom.js"></script>
+    
+    {literal}
+        <script>
+            CKEDITOR.replace('editor_content');
+        </script>
+    {/literal}
 
 </body>
 </html>
