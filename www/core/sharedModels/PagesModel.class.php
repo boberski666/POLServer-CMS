@@ -22,4 +22,34 @@ class PagesModel extends Model {
 	    }
     }
     
+    public function loadPageForEdit($id = 0) {
+     	$page = parent::loadSingle( 'id = ?', [ $id ] );
+     	if(count($page) == 0) {
+     		return array(false, $page);
+	    } else {
+	    	return array(true, $page);
+	    }
+    }
+    
+    public function loadPageByID( $id = 1) {
+        return parent::loadByID( $id );
+    }
+    
+    public function removePage( $id = 1) {
+        parent::loadByID( $id );
+        parent::delete();
+    }
+    
+    public function newPage() {
+        return parent::xprepare();
+    }
+
+	public function savePage() {
+        return parent::save();
+    }
+    
+    public function loadAllPages() {
+        return parent::loadAll();
+    }
+    
 }
