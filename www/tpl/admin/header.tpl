@@ -12,5 +12,6 @@
     <link href="/admin/assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
 </head>
 <body>
