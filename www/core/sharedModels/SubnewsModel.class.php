@@ -6,7 +6,7 @@ class SubnewsModel extends Model {
 			$inst->news = 0;
 			$inst->type = '';
 			$inst->scope = '';
-			$inst->changeText = '';
+			$inst->changeText = str_repeat('&ensp;', 256);;
 			$inst->author = '';
 
 			R::store( $inst );
